@@ -1,2 +1,2 @@
 # Rainbow-Projects
-Rainbow Projects deals with lifts, this repository deals with Generating Quotation
+Rainbow Projects deals with lifts in Andhra Pradesh, India. This repository deals with Generating Quotation
