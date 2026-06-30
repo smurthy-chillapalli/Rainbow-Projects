@@ -1,0 +1,14 @@
+<section>
+	<h3 class="font-semibold underline text-center mb-8">ANNEXURE I - SPECIFICATION</h3>
+	<table class="w-full text-left border-collapse border border-gray-400">
+		<tbody>
+			@for(specItem of specificationDetails.specifications; track specItem.order; let id = $index) {
+				<tr class="border-b">
+					<td class="border border-gray-300 p-1 px-2">{{id + 1}}</td>
+					<td class="border w-44 border-gray-300 p-1 px-2">{{specItem.label}}</td>
+					<td class="border border-gray-300 p-1 px-2 font-semibold">{{specItem.value}}</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</section>
