@@ -11,5 +11,5 @@ import { HeaderComponent } from './header/header';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('rainbowLifts');
+  protected readonly title = signal('Rainbow Projects');
 }

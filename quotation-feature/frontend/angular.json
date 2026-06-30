@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rainbowLifts": {
+    "rainbowProjects": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "rainbowLifts:build:production"
+              "buildTarget": "rainbowProjects:build:production"
             },
             "development": {
-              "buildTarget": "rainbowLifts:build:development"
+              "buildTarget": "rainbowProjects:build:development"
             }
           },
           "defaultConfiguration": "development"
