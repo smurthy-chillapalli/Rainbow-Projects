@@ -1,0 +1,117 @@
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use 'tailwindcss';
+@use '@angular/material' as mat;
+
+*, ::before, ::after {
+  border-style: none;
+}
+
+:root {
+  @include mat.form-field-density(-2);
+}
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+
+html, body { height: 100%; }
+body, input { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif !important; }
+
+input { font-size: 14px !important; }
+
+div, table, tr, th, td { border-style: solid; }
+
+@media print {
+
+  @page {
+    size: A4;
+    margin: 15mm 20mm 4mm 20mm;
+  }
+
+  html, body, #root, .app-container {
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  body {
+    margin: 0;
+    font-size: 11pt;
+    line-height: 15pt;
+  }
+
+  header, footer, button { 
+    display: none;
+  }
+
+  .page-content {
+    width: 100%;
+    
+    .quotation-block {
+      width: 100% !important;
+      height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      display: block !important;
+      overflow: visible;
+    }
+    
+    .page {
+      box-sizing: border-box;
+      break-after: page;
+      
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      height: 277mm;
+      max-height: 277mm;
+      page-break-inside: avoid;
+      page-break-after: always;
+      position: relative;
+  
+      &:last-child {
+        break-after: auto;
+        page-break-after: auto;
+      }
+
+      .actual-content-body {
+        flex-grow: 1;
+      }
+
+      .page-footer {
+        border-top: 1px solid #000;
+        text-align: center;
+        font-size: 10pt;
+        line-height: 14pt;
+      }
+    }
+  }
+}

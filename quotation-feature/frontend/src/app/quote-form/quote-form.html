@@ -1,0 +1,295 @@
+<section>
+	<p class="mb-2 text-right text-sm">Please fill the below form to Request a Quotation</p>
+	<div class="form-block p-8" style="height: 500px; overflow-y: auto;">
+		<form [formGroup]="quoteDetailsForm">
+			<!-- Customer Details -->
+			<div class="text-lg border-b border-solid border-gray-400 mb-4">
+				<h3>Customer Details</h3>
+			</div>
+			<div class="grid grid-cols-3 gap-4 mb-6">
+				<div>
+					<p class="mb-1">Customer Full Name</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="customerName" placeholder="Customer Name">
+						@let custNameFieldcontrol = quoteDetailsForm.get('customerName');
+						@if(custNameFieldcontrol?.invalid) {
+							<mat-error>
+								@if(custNameFieldcontrol?.hasError('required')) {
+									Please enter Customer Name
+								}
+								@if(custNameFieldcontrol?.hasError('pattern')) {
+									Please enter only Alphabets
+								}
+							</mat-error>
+						}
+					</mat-form-field>
+				</div>
+
+				<div>
+					<p class="mb-1">Customer Address</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="customerAddress" placeholder="Customer Address">
+					</mat-form-field>
+				</div>
+
+				<div>
+					<p class="mb-1">Mobile Number</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput matNativeControl formControlName="mobileNumber" placeholder="Mobile Number" min="10" max="10">
+						@let mobileNumberFieldcontrol = quoteDetailsForm.get('mobileNumber');
+						@if(mobileNumberFieldcontrol?.invalid) {
+							<mat-error>
+								@if(mobileNumberFieldcontrol?.hasError('required')) {
+									Please enter Mobile Number
+								} @else if(mobileNumberFieldcontrol?.hasError('pattern')) {
+									Please enter only Numbers
+								} @else if(mobileNumberFieldcontrol?.hasError('minlength')) {
+									Mobile Number must be 10 digits
+								} @else if(mobileNumberFieldcontrol?.hasError('maxlength')) {
+									Mobile Number cannot exceeds 10 digits
+								}
+							</mat-error>
+						}
+					</mat-form-field>
+				</div>
+
+				<div>
+					<p class="mb-1">Quotation Date</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput [matDatepicker]="quoteDatepicker" formControlName="quoteDate" placeholder="Quotation Date" readonly>
+						<mat-hint>MM/DD/YYYY</mat-hint>
+						<mat-datepicker-toggle matIconSuffix [for]="quoteDatepicker"></mat-datepicker-toggle>
+						<mat-datepicker #quoteDatepicker></mat-datepicker>
+					</mat-form-field>
+				</div>
+
+				<div>
+					<p class="mb-1">Project / Site Address</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="siteAddress" placeholder="Site Address">
+						@let siteAddressControl = quoteDetailsForm.get('siteAddress');
+						@if(siteAddressControl?.invalid) {
+							<mat-error>
+								@if(siteAddressControl?.hasError('required')) {
+									Please enter Site Address
+								}
+							</mat-error>
+						}
+					</mat-form-field>
+				</div>
+
+				<div>
+					<p class="mb-1">Project / Site Visit Date</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput [matDatepicker]="siteVisitDatepicker" formControlName="siteVisitDate" placeholder="Site Visit Date" readonly>
+						<mat-hint>MM/DD/YYYY</mat-hint>
+						<mat-datepicker-toggle matIconSuffix [for]="siteVisitDatepicker"></mat-datepicker-toggle>
+						<mat-datepicker #siteVisitDatepicker></mat-datepicker>
+					</mat-form-field>
+				</div>
+			</div>
+
+			<!-- Core Engineering & Performance Details -->
+			<div class="text-lg border-b border-solid border-gray-400 mb-4">
+				<h3>Core Engineering &amp; Performance  Details</h3>
+			</div>
+			<div class="grid grid-cols-3 gap-4 mb-6">
+				<div>
+					<p class="mb-1">Type of Elevator / Lift</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="elevatorType" placeholder="Elevator Type">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Capacity (Passenger)</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput type="number" formControlName="passengerCapacity" placeholder="Passenger Capacity" min="1" max="100">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Capacity (Weight / Kilograms)</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="capacityWeight" placeholder="Capacity (Weight)" [value]="calculateWeight" readonly>
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Drive Type</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="driveType" placeholder="Drive Type">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Travel Speed (Mtr / Speed)</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput type="number" formControlName="travelSpeed" placeholder="Travel Speed (Mtr / Speed)" min="1" max="100">
+					</mat-form-field>
+				</div>
+			</div>
+			
+			<!--  -->
+			<div class="text-lg border-b border-solid border-gray-400 mb-4">
+				<h3>Structural Stops &amp; Levels  Details</h3>
+			</div>
+			<div class="grid grid-cols-3 gap-4 mb-6">
+				<div>
+					<p class="mb-1">Total Number of Floors</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="totalFloors" placeholder="Number of Floors">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Total Number of Landings / Stops</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="floorStops" placeholder="Number of Floors Landings / Stops">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Total Number of Openings</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="floorOpenings" placeholder="Number of Floor Openings">
+					</mat-form-field>
+				</div>
+			</div>
+
+			<!--  -->
+			<div class="text-lg border-b border-solid border-gray-400 mb-4">
+				<h3>Structural &amp; Core Operational Capacity Details</h3>
+			</div>
+			<div class="grid grid-cols-3 gap-4 mb-6">
+				<div>
+					<p class="mb-1">Controller System</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="controllerSystem" placeholder="Controller System">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Operantion Logic</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="operationLogic" placeholder="Operation Logic">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Signal Display Type</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="signalType" placeholder="Signal Display Type">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Car / Landing Indicators</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="carIndicators" placeholder="Car / Landing Indicators">
+					</mat-form-field>
+				</div>
+			</div>
+
+			<!--  -->
+			<div class="text-lg border-b border-solid border-gray-400 mb-4">
+				<h3>Physical Measurements Details</h3>
+			</div>
+			<div class="grid grid-cols-3 gap-4 mb-6">
+				<div>
+					<p class="mb-1">Machine Space Dimensions (Width x Depth)</p>
+					<mat-form-field appearance="outline" class="w-1/3 mr-3">
+						<input matInput type="number" formControlName="machineWidthDimensions" placeholder="Width" min="1">
+					</mat-form-field>
+					<mat-form-field appearance="outline" class="w-1/3">
+						<input matInput type="number" formControlName="machineDepthDimensions" placeholder="Depth" min="1">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Lift / Shaft Dimensions (Width x Depth)</p>
+					<mat-form-field appearance="outline" class="w-1/3 mr-3">
+						<input matInput type="number" formControlName="shaftWidthDimensions" placeholder="Width" min="1">
+					</mat-form-field>
+					<mat-form-field appearance="outline" class="w-1/3">
+						<input matInput type="number" formControlName="shaftDepthDimensions" placeholder="Depth" min="1">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Cabin / Car Type</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="cabinType" placeholder="Cabin / Car Type">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Cabin Dimensions (Width x Depth)</p>
+					<mat-form-field appearance="outline" class="w-1/3 mr-3">
+						<input matInput type="number" formControlName="cabinWidthDimensions" placeholder="Width" min="1">
+					</mat-form-field>
+					<mat-form-field appearance="outline" class="w-1/3">
+						<input matInput type="number" formControlName="cabinDepthDimensions" placeholder="Depth" min="1">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Cabin Construction</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="cabinConstruction" placeholder="Cabin Construction">
+					</mat-form-field>
+				</div>
+			</div>
+
+			<!--  -->
+			<div class="text-lg border-b border-solid border-gray-400 mb-4">
+				<h3>Interior &amp; Door design Details</h3>
+			</div>
+			<div class="grid grid-cols-3 gap-4 mb-6">
+				<div>
+					<p class="mb-1">Cabin Door Header</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="cabinDoorHeader" placeholder="Cabin Door Header">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Landing Door Header</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="landingDoorHeader" placeholder="Landing Door Header">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Clear Door Opening</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="clearDoorOpening" placeholder="Clear Door Opening">
+					</mat-form-field>
+				</div>
+			</div>
+			
+			<!--  -->
+			<div class="text-lg border-b border-solid border-gray-400 mb-4">
+				<h3>Power &amp; Warranty Details</h3>
+			</div>
+			<div class="grid grid-cols-3 gap-4 mb-6">
+				<div>
+					<p class="mb-1">Power Supply</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="powerSupply" placeholder="Power Supply">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">COP / LOP</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="coplop" placeholder="COP / LOP">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Steel / Civil works</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput formControlName="civilWorks" placeholder="Steel / Civil works">
+					</mat-form-field>
+				</div>
+				<div>
+					<p class="mb-1">Warranty</p>
+					<mat-form-field appearance="outline" class="w-full">
+						<input matInput type="number" formControlName="warranty" placeholder="Warranty" min="0" max="100">
+					</mat-form-field>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="button-block text-center mt-8">
+		<button
+			class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm font-medium rounded-md shadow-sm transition-colors
+					disabled:bg-slate-200 disabled:text-slate-600 disabled:pointer-events-none"
+			[disabled]="!quoteDetailsForm.valid"
+			(click)="getQuoteDetails()">Request a Quote</button>
+	</div>
+</section>

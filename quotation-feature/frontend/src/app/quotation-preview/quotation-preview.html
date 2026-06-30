@@ -1,0 +1,95 @@
+<section class="quotation-block p-8 pdf-print-safe" #pdfTable>
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<cover-page [customerDetails]="quotationDetails.customerDetails"></cover-page>
+		</div>
+		<page-footer></page-footer>
+	</div>
+	<!-- Annexure One -->
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-one [specificationDetails]="quotationDetails"></annexure-one>
+		</div>
+		<page-footer></page-footer>
+	</div>
+	<!-- Annexure Two -->
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-two></annexure-two>
+		</div>
+		<page-footer></page-footer>
+	</div>
+	<!-- Annexure Three -->
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-three></annexure-three>
+		</div>
+		<page-footer></page-footer>
+	</div>
+
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-three-page-second-part></annexure-three-page-second-part>
+		</div>
+		<page-footer></page-footer>
+	</div>
+	<!-- Annexure Foure -->
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-four></annexure-four>
+		</div>
+		<page-footer></page-footer>
+	</div>
+
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-four-part-one></annexure-four-part-one>
+		</div>
+		<page-footer></page-footer>
+	</div>
+
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-four-part-two></annexure-four-part-two>
+		</div>
+		<page-footer></page-footer>
+	</div>
+	<!-- Annexure Five -->
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-five></annexure-five>
+		</div>
+		<page-footer></page-footer>
+	</div>
+	
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-five-part-one></annexure-five-part-one>
+		</div>
+		<page-footer></page-footer>
+	</div>
+
+	<div class="page">
+		<div class="actual-content-body">
+			<page-header [quoteDate]="quotationDetails.customerDetails.quoteDate"></page-header>
+			<annexure-five-part-two></annexure-five-part-two>
+		</div>
+		<page-footer></page-footer>
+	</div>
+</section>
+
+<div class="mt-8 text-center">
+	<button
+		class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white text-sm font-medium rounded-md shadow-sm transition-colors"
+		(click)="generatePDF()">Generate Quotation</button>
+</div>
